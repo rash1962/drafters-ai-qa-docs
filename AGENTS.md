@@ -423,3 +423,1234 @@ When performing tasks, AI agents should use the repository in the following orde
 - Create a new module document whenever a new feature is introduced.
 - Remove obsolete documentation after feature deprecation.
 - Ensure all documentation remains synchronized with the latest application behavior.
+
+# 5. Authentication
+
+## Overview
+
+The Drafters platform requires user authentication before accessing protected features such as Wallet, Contests, Draft, Profile, and Payments.
+
+Authentication is role-based and varies depending on the platform (Web, Mobile, or Admin Portal).
+
+---
+
+## Authentication Methods
+
+### Web Application
+
+- Login using registered email and password.
+- Session is established after successful authentication.
+- Authenticated users can access protected modules based on their permissions.
+
+### Mobile Application (Android & iOS)
+
+- Login using registered email and password.
+- Authentication session is maintained until logout or session expiration.
+- Users must be authenticated before accessing restricted features.
+
+### Admin Portal
+
+- Admin users authenticate using administrator credentials.
+- Access is restricted based on assigned roles and permissions.
+
+---
+
+## User Roles
+
+### End User
+
+Permissions:
+
+- Register an account
+- Login
+- Complete KYC
+- Add Funds
+- Join Contests
+- Draft Players
+- Participate in Pick'em
+- View Rankings
+- Manage Profile
+
+---
+
+### Administrator
+
+Permissions:
+
+- Manage Contests
+- Configure Promotions
+- Manage Users
+- View Reports
+- Configure Responsible Gaming
+- Manage Payment Settings
+
+---
+
+### QA User
+
+Permissions:
+
+- Validate application functionality
+- Execute test scenarios
+- Verify business rules
+- Access staging environments using approved QA accounts
+
+---
+
+## Authentication Validation Checklist
+
+AI agents should verify:
+
+- Successful login with valid credentials.
+- Proper error message for invalid credentials.
+- Protected screens require authentication.
+- Logout invalidates the active session.
+- Unauthorized users cannot access protected resources.
+- Session expiration is handled correctly.
+- User role permissions are enforced.
+
+---
+
+## Security Guidelines
+
+- Never store usernames or passwords in this repository.
+- Never include production credentials.
+- Use QA or staging accounts for testing.
+- Credentials should be managed through secure secret management systems or environment variables.
+
+---
+
+## AI Agent Instructions
+
+When generating test cases or automation:
+
+- Use only approved QA test accounts.
+- Do not hardcode credentials in automation scripts.
+- Validate both positive and negative authentication scenarios.
+- Verify appropriate error messages for authentication failures.
+- Confirm role-based access control is functioning as expected.
+
+# 6. Business Domains
+
+## Overview
+
+The Drafters platform is divided into multiple business domains that collectively deliver the fantasy sports experience across Web, Android, iOS, and the Admin Portal.
+
+Each domain has its own business rules, workflows, APIs, and validation requirements. AI agents must understand the purpose of each domain before generating automation, reviewing code, or analyzing defects.
+
+Detailed documentation for each module is maintained in the `flows/` directory.
+
+---
+
+## 6.1 Authentication
+
+**Purpose**
+
+Manages user authentication and secure access to the platform.
+
+**Responsibilities**
+
+- User Login
+- Session Management
+- Password Reset
+- Logout
+- Role-Based Access Control
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+**Reference**
+
+`flows/authentication.md`
+
+---
+
+## 6.2 Registration
+
+**Purpose**
+
+Allows new users to create an account and begin onboarding.
+
+**Responsibilities**
+
+- User Registration
+- Email Verification
+- Terms & Conditions Acceptance
+- Initial Account Creation
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/registration.md`
+
+---
+
+## 6.3 User Profile
+
+**Purpose**
+
+Allows users to manage their personal information and account settings.
+
+**Responsibilities**
+
+- View Profile
+- Edit Profile
+- Account Settings
+- Preferences
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/profile.md`
+
+---
+
+## 6.4 Identity Verification (KYC)
+
+**Purpose**
+
+Verifies user identity to meet regulatory and compliance requirements.
+
+**Responsibilities**
+
+- Identity Verification
+- Document Validation
+- Verification Status
+- Compliance Checks
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+**Reference**
+
+`flows/kyc.md`
+
+---
+
+## 6.5 Wallet
+
+**Purpose**
+
+Manages user funds and transaction history.
+
+**Responsibilities**
+
+- Wallet Balance
+- Deposits
+- Withdrawals
+- Transaction History
+- Bonus Credits
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/wallet.md`
+
+---
+
+## 6.6 Payments
+
+**Purpose**
+
+Processes secure financial transactions.
+
+**Responsibilities**
+
+- Finix Payment Gateway
+- PayPal
+- Credit & Debit Cards
+- Payment Validation
+- 3DS Authentication
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/finix-payment.md`
+
+---
+
+## 6.7 Contest Management
+
+**Purpose**
+
+Allows users to browse, join, and manage fantasy contests.
+
+**Responsibilities**
+
+- Contest Lobby
+- Contest Details
+- Contest Entry
+- Contest Rules
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+**Reference**
+
+`flows/contest.md`
+
+---
+
+## 6.8 Draft
+
+**Purpose**
+
+Supports player drafting during fantasy contests.
+
+**Responsibilities**
+
+- Draft Room
+- Player Selection
+- Pick Timer
+- Auto Pick
+- Draft Queue
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/draft.md`
+
+---
+
+## 6.9 Pick'em
+
+**Purpose**
+
+Allows users to create prediction-based fantasy entries.
+
+**Responsibilities**
+
+- Pick Selection
+- Entry Submission
+- Live Picks
+- Pick History
+- Result Settlement
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/pickem.md`
+
+---
+
+## 6.10 Props Booster
+
+**Purpose**
+
+Provides promotional boosters that increase potential winnings based on configured rules.
+
+**Responsibilities**
+
+- Booster Eligibility
+- Bonus Calculation
+- Promotional Rules
+- Reward Distribution
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+**Reference**
+
+`flows/props-booster.md`
+
+---
+
+## 6.11 Best Ball Survival
+
+**Purpose**
+
+Supports survival-style fantasy contests where entries advance or are eliminated based on weekly performance.
+
+**Responsibilities**
+
+- Weekly Advancement
+- Elimination Rules
+- Survival Leaderboard
+- Final Rankings
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+**Reference**
+
+`flows/best-ball-survival.md`
+
+---
+
+## 6.12 Rankings & Leaderboards
+
+**Purpose**
+
+Displays rankings and standings for players, contests, and fantasy competitions.
+
+**Responsibilities**
+
+- Contest Rankings
+- Player Rankings
+- Leaderboards
+- Season Standings
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/ranking.md`
+
+---
+
+## 6.13 Notifications
+
+**Purpose**
+
+Delivers important updates and promotional messages to users.
+
+**Responsibilities**
+
+- Push Notifications
+- Email Notifications
+- In-App Notifications
+- Promotional Campaigns
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+
+**Reference**
+
+`flows/notifications.md`
+
+---
+
+## 6.14 Responsible Gaming
+
+**Purpose**
+
+Ensures compliance with responsible gaming policies and user protection requirements.
+
+**Responsibilities**
+
+- Deposit Limits
+- Spending Limits
+- Account Restrictions
+- Compliance Rules
+
+**Platforms**
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+**Reference**
+
+`flows/responsible-gaming.md`
+
+---
+
+## 6.15 Admin Portal
+
+**Purpose**
+
+Provides administrative capabilities for managing the Drafters platform.
+
+**Responsibilities**
+
+- Contest Management
+- User Management
+- Payment Configuration
+- Promotions
+- Reporting
+- Responsible Gaming Configuration
+- Feature Management
+
+**Platforms**
+
+- Admin Portal
+
+**Reference**
+
+`flows/admin-panel.md`
+
+---
+
+## AI Agent Responsibilities
+
+Before generating code, automation scripts, test cases, or reviewing pull requests, AI agents must:
+
+1. Identify the relevant business domain.
+2. Read the corresponding documentation under the `flows/` directory.
+3. Follow documented business rules and QA standards.
+4. Avoid assumptions about undocumented functionality.
+5. Request clarification when business requirements are incomplete or ambiguous.
+
+# 7. Business Rules
+
+## Overview
+
+Business rules define the expected behavior of the Drafters platform. AI agents must follow these rules when generating automation tests, reviewing code, analyzing defects, or validating application behavior.
+
+AI agents must never assume business behavior that is not documented.
+
+---
+
+## 7.1 Authentication
+
+### Rules
+
+- Users must register before accessing protected features.
+- Only authenticated users can access Wallet, Contests, Draft, Pick'em, and Profile.
+- Invalid credentials must display an appropriate error message.
+- User sessions must expire according to platform configuration.
+- Logout must invalidate the active session.
+
+---
+
+## 7.2 Registration
+
+### Rules
+
+- Every account must have a unique email address.
+- Required fields must be validated before registration.
+- Registration must not create duplicate accounts.
+- Email verification may be required before accessing certain features.
+- Users must accept Terms & Conditions before registration.
+
+---
+
+## 7.3 KYC
+
+### Rules
+
+- Users must complete KYC where required by business regulations.
+- Verification status must be updated after successful verification.
+- Failed verification must not grant restricted access.
+- Users cannot bypass mandatory KYC requirements.
+
+---
+
+## 7.4 Wallet
+
+### Rules
+
+- Wallet balance must never become negative.
+- Successful deposits must update the wallet balance.
+- Failed deposits must not update the wallet balance.
+- Every successful transaction must appear in Transaction History.
+- Transaction amounts must be recorded accurately.
+
+---
+
+## 7.5 Payments
+
+### Rules
+
+- Payment processing must validate all required fields.
+- Failed payments must not create wallet credit.
+- Successful payments must update wallet balance.
+- Payment errors must display meaningful messages.
+- Duplicate payment requests should not create duplicate transactions.
+- Sensitive payment information must never be exposed.
+
+---
+
+## 7.6 Contest
+
+### Rules
+
+- Users can join only contests for which they are eligible.
+- Entry fees must be deducted only after successful contest entry.
+- Contest rules must be displayed before joining.
+- Contest status must update correctly.
+
+---
+
+## 7.7 Draft
+
+### Rules
+
+- Draft starts only when contest conditions are satisfied.
+- Players cannot be selected more than once within the same draft.
+- Auto Pick occurs when the user does not make a selection before the timer expires.
+- Draft order must follow contest rules.
+- Draft results must be saved correctly.
+
+---
+
+## 7.8 Pick'em
+
+### Rules
+
+- Users must complete all required selections before submitting an entry.
+- Submitted entries cannot be modified after confirmation unless supported by business rules.
+- Results must be calculated according to official scoring rules.
+
+---
+
+## 7.9 Props Booster
+
+### Rules
+
+- Booster eligibility must follow configured business rules.
+- Bonus calculations must be accurate.
+- Expired boosters must not be available.
+- Users must clearly see booster terms and conditions.
+
+---
+
+## 7.10 Rankings
+
+### Rules
+
+- Rankings must be calculated using official scoring.
+- Leaderboards must update after scoring changes.
+- Users should only see data they are authorized to access.
+
+---
+
+## 7.11 Notifications
+
+### Rules
+
+- Notifications must be delivered only to eligible users.
+- Duplicate notifications should be avoided.
+- Notification content must match the triggering event.
+
+---
+
+## 7.12 Responsible Gaming
+
+### Rules
+
+- Deposit limits must be enforced.
+- Users exceeding configured limits must be restricted.
+- Responsible Gaming settings must be applied consistently across supported platforms.
+
+---
+
+## AI Agent Instructions
+
+When generating automation or reviewing functionality:
+
+- Follow documented business rules.
+- Do not infer undocumented behavior.
+- Report any conflicts between implementation and documented business rules.
+- Raise clarification requests if requirements are ambiguous.
+
+# 8. Frontend QA Guidelines
+
+## Overview
+
+The Drafters platform is available on Web, Android, and iOS. All frontend features must provide a consistent, reliable, and user-friendly experience across supported platforms.
+
+AI agents should follow these QA guidelines when generating automation scripts, reviewing UI changes, or validating feature implementations.
+
+---
+
+## Supported Platforms
+
+- Web
+- Android
+- iOS
+
+---
+
+## General QA Checklist
+
+The following validations should be performed for every feature unless otherwise specified.
+
+### Functional Validation
+
+- Verify all user actions complete successfully.
+- Verify business rules are correctly implemented.
+- Verify all validations and error messages.
+- Verify success messages where applicable.
+- Verify navigation between screens.
+
+---
+
+### UI Validation
+
+- Verify layout consistency.
+- Verify fonts, icons, colors, and spacing.
+- Verify images and assets load correctly.
+- Verify responsive behavior on supported screen sizes.
+- Verify dark/light mode if supported.
+- Verify platform-specific UI guidelines are followed.
+
+---
+
+### Navigation Validation
+
+Verify:
+
+- Correct screen navigation
+- Back navigation
+- Deep links (where applicable)
+- External links
+- Menu navigation
+- Bottom navigation
+- Tab navigation
+
+---
+
+### API Validation
+
+Verify:
+
+- No failed API requests.
+- Correct HTTP status codes.
+- Correct response payload.
+- Correct error handling.
+- Proper loading indicators during API calls.
+
+---
+
+### Performance Validation
+
+Verify:
+
+- Loading indicators appear when required.
+- Loading indicators disappear after completion.
+- No excessive loading delays.
+- Smooth scrolling and animations.
+- No UI freezes.
+
+---
+
+### Error Handling
+
+Verify:
+
+- Meaningful validation messages.
+- Network failure handling.
+- Timeout handling.
+- Empty state handling.
+- Retry functionality where supported.
+
+---
+
+### Console & Log Validation
+
+For Web:
+
+Verify:
+
+- No JavaScript errors.
+- No Console Errors.
+- No Failed Network Requests.
+- No Broken Resources.
+
+For Mobile:
+
+Verify:
+
+- No Application Crashes.
+- No Unexpected Exceptions.
+- No ANR (Android Not Responding).
+- No iOS Crash Logs.
+
+---
+
+## Core User Journeys
+
+AI agents should prioritize validation of the following business-critical user journeys.
+
+### Authentication
+
+Entry Point
+
+- Login Screen
+
+User Actions
+
+- Login
+- Logout
+- Forgot Password
+
+Expected Results
+
+- Successful authentication
+- Proper session creation
+- Appropriate validation messages
+
+Reference
+
+flows/authentication.md
+
+---
+
+### Registration
+
+Entry Point
+
+- Registration Screen
+
+User Actions
+
+- Create Account
+- Verify Email
+- Accept Terms
+
+Expected Results
+
+- Successful account creation
+- Proper validations
+- Email verification
+
+Reference
+
+flows/registration.md
+
+---
+
+### KYC
+
+Entry Point
+
+- Verification Screen
+
+User Actions
+
+- Submit documents
+- Complete verification
+
+Expected Results
+
+- Verification status updates correctly
+- Appropriate validation messages
+
+Reference
+
+flows/kyc.md
+
+---
+
+### Wallet
+
+Entry Point
+
+- Wallet Screen
+
+User Actions
+
+- Deposit Funds
+- Withdraw Funds
+- View Transaction History
+
+Expected Results
+
+- Balance updates correctly
+- Transactions recorded
+- Proper success and error handling
+
+Reference
+
+flows/wallet.md
+
+---
+
+### Payments
+
+Entry Point
+
+- Add Funds
+
+User Actions
+
+- Add Card
+- Complete Payment
+- 3DS Authentication
+
+Expected Results
+
+- Payment processed correctly
+- Wallet updated
+- Transaction history updated
+
+Reference
+
+flows/finix-payment.md
+
+---
+
+### Contest
+
+Entry Point
+
+- Contest Lobby
+
+User Actions
+
+- Browse Contests
+- View Details
+- Join Contest
+
+Expected Results
+
+- Contest joined successfully
+- Entry fee deducted correctly
+
+Reference
+
+flows/contest.md
+
+---
+
+### Draft
+
+Entry Point
+
+- Draft Room
+
+User Actions
+
+- Join Draft
+- Select Player
+- Auto Pick
+
+Expected Results
+
+- Draft progresses correctly
+- Player selection follows business rules
+
+Reference
+
+flows/draft.md
+
+---
+
+### Pick'em
+
+Entry Point
+
+- Pick'em Lobby
+
+User Actions
+
+- Select Picks
+- Submit Entry
+
+Expected Results
+
+- Entry submitted successfully
+- Picks displayed correctly
+
+Reference
+
+flows/pickem.md
+
+---
+
+### Notifications
+
+Verify:
+
+- Push Notifications
+- Email Notifications
+- In-App Notifications
+
+Reference
+
+flows/notifications.md
+
+---
+
+## Cross-Platform Validation
+
+For every feature, AI agents should verify:
+
+- Feature parity across Web, Android, and iOS.
+- Platform-specific UI differences.
+- Platform-specific limitations.
+- Consistent business logic.
+- Consistent API behavior.
+
+---
+
+## Accessibility Validation
+
+Where applicable, verify:
+
+- Readable text
+- Proper button labels
+- Focus behavior
+- Keyboard navigation (Web)
+- Screen reader compatibility
+
+---
+
+## AI Agent Instructions
+
+When generating frontend automation:
+
+- Validate complete user journeys instead of isolated screens.
+- Follow documented business rules.
+- Verify positive, negative, and edge-case scenarios.
+- Capture screenshots for failures.
+- Report console errors, API failures, and UI inconsistencies.
+- Do not assume feature behavior that is not documented.
+
+## Regression Priority
+
+### High Priority
+
+- Authentication
+- Login
+- Registration
+- KYC
+- Wallet
+- Payments
+- Contest Join
+- Draft
+- Pick'em Submission
+
+### Medium Priority
+
+- Rankings
+- Notifications
+- Profile
+- Promotions
+
+### Low Priority
+
+- Static Content
+- Help Pages
+- FAQs
+
+# 9. API QA Guidelines
+
+## Overview
+
+The Drafters platform relies on REST APIs to support Web, Android, iOS, and Admin Portal functionality. AI agents should validate API behavior against documented business requirements and ensure consistent responses across all supported platforms.
+
+Detailed endpoint documentation should be maintained under the `api/` directory.
+
+---
+
+## API Validation Standards
+
+AI agents should validate the following for every API unless explicitly documented otherwise.
+
+### Request Validation
+
+- Verify required request parameters.
+- Verify optional request parameters.
+- Verify request headers.
+- Verify authentication token requirements.
+- Verify supported HTTP methods.
+- Verify request payload format.
+
+---
+
+### Response Validation
+
+Verify:
+
+- Correct HTTP status code.
+- Response follows the documented schema.
+- Required fields are present.
+- Data types are correct.
+- Response values match business expectations.
+- No unexpected or null values are returned.
+
+---
+
+### Authentication & Authorization
+
+Verify:
+
+- Protected APIs require authentication.
+- Invalid or expired tokens are rejected.
+- Unauthorized users cannot access restricted APIs.
+- Role-based access control is enforced.
+
+---
+
+### Input Validation
+
+Verify handling of:
+
+- Missing required fields.
+- Invalid data types.
+- Empty values.
+- Boundary values.
+- Invalid formats.
+- Duplicate requests.
+- Malicious input where applicable.
+
+---
+
+### Error Handling
+
+Verify:
+
+- Appropriate HTTP status codes.
+- User-friendly error messages.
+- No internal server implementation details are exposed.
+- Stack traces are never returned.
+- Error responses follow a consistent format.
+
+---
+
+### Performance Validation
+
+Verify:
+
+- API response time meets project performance expectations.
+- No unnecessary delays.
+- APIs remain responsive under normal usage.
+- Timeouts are handled correctly.
+
+---
+
+### Data Validation
+
+Verify:
+
+- Database updates are reflected correctly.
+- Response data matches stored data.
+- Calculated values are accurate.
+- Transactions are committed correctly.
+- No duplicate records are created.
+
+---
+
+### Security Validation
+
+Verify:
+
+- Sensitive information is never exposed.
+- Passwords and secrets are never returned.
+- Tokens are securely handled.
+- HTTPS is used where applicable.
+- Authorization rules are enforced.
+
+---
+
+## API Categories
+
+The Drafters platform includes APIs for:
+
+- Authentication
+- Registration
+- User Profile
+- KYC
+- Wallet
+- Payments
+- Contest Management
+- Draft
+- Pick'em
+- Rankings
+- Notifications
+- Responsible Gaming
+- Admin Portal
+
+Detailed documentation for each category should be maintained in the `api/` directory.
+
+---
+
+## Common HTTP Status Codes
+
+| Status Code | Meaning |
+|-------------|---------|
+| 200 | Success |
+| 201 | Resource Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+| 404 | Resource Not Found |
+| 409 | Conflict |
+| 422 | Validation Error |
+| 500 | Internal Server Error |
+
+---
+
+## AI Agent Instructions
+
+When validating APIs:
+
+1. Verify request and response structures.
+2. Validate business rules.
+3. Check authentication and authorization.
+4. Verify database consistency where applicable.
+5. Report failed API requests with request and response details.
+6. Never expose secrets or authentication credentials in reports.
+7. Follow the documented API specification before generating automation.
+
+## API Regression Priority
+
+### High Priority
+
+- Authentication APIs
+- Registration APIs
+- Wallet APIs
+- Payment APIs
+- Contest Join APIs
+- Draft APIs
+
+### Medium Priority
+
+- Rankings APIs
+- Notifications APIs
+- Profile APIs
+
+### Low Priority
+
+- Static Configuration APIs
+- Content APIs
