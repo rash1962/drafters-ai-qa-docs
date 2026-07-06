@@ -1654,3 +1654,367 @@ When validating APIs:
 
 - Static Configuration APIs
 - Content APIs
+
+# 11. Logging Requirements
+
+## Overview
+
+Logs are essential for identifying, diagnosing, and resolving application issues. AI agents should inspect relevant logs during test execution, automation failures, API validation, and defect analysis.
+
+Whenever a test fails, AI agents should collect and analyze the appropriate logs before reporting the issue.
+
+---
+
+## Browser Console Logs (Web)
+
+AI agents should verify:
+
+- No JavaScript errors.
+- No uncaught exceptions.
+- No deprecated API warnings affecting functionality.
+- No failed resource loading.
+- No unexpected console errors during user interactions.
+
+Report:
+
+- JavaScript Exceptions
+- Console Errors
+- Failed Resource Loading
+- Unexpected Warnings affecting application behavior
+
+Ignore:
+
+- Browser extension warnings
+- Known third-party library warnings (if documented)
+- Non-impacting informational messages
+
+---
+
+## Network Logs
+
+AI agents should inspect:
+
+- Failed API requests
+- Incorrect HTTP status codes
+- Request payload validation
+- Response payload validation
+- API response time
+- Authentication failures
+
+Report:
+
+- 4xx Errors (Unexpected)
+- 5xx Errors
+- Timeout Errors
+- API Contract Violations
+
+---
+
+## Android Logs (Logcat)
+
+AI agents should verify:
+
+- No application crashes
+- No ANR (Application Not Responding)
+- No uncaught exceptions
+- No repeated runtime errors
+
+Report:
+
+- Fatal Exceptions
+- Application Crashes
+- Memory Issues
+- Unexpected Errors
+
+Ignore:
+
+- Known SDK warnings
+- Debug logs
+- Informational logs
+
+---
+
+## iOS Logs
+
+AI agents should verify:
+
+- No application crashes
+- No runtime exceptions
+- No unexpected system errors
+
+Report:
+
+- Crash Logs
+- Fatal Exceptions
+- Critical Runtime Errors
+
+Ignore:
+
+- Apple framework informational logs
+- Known simulator warnings (if applicable)
+
+---
+
+## Backend Logs
+
+Verify:
+
+- API execution
+- Business validation failures
+- Authentication failures
+- Database exceptions
+- Payment processing errors
+- Integration failures
+
+Report:
+
+- Unhandled Exceptions
+- Database Errors
+- Payment Gateway Errors
+- Internal Server Errors
+
+---
+
+## Database Logs
+
+Verify:
+
+- Query execution failures
+- Connection issues
+- Transaction failures
+- Deadlocks
+- Data consistency errors
+
+---
+
+## Third-Party Integration Logs
+
+Verify integrations including:
+
+- Finix Payment Gateway
+- PayPal
+- KYC Provider
+- Push Notification Services
+- Email Services
+
+Report:
+
+- Authentication failures
+- API failures
+- Timeout errors
+- Invalid responses
+- Service unavailable errors
+
+---
+
+## Performance Logs
+
+Verify:
+
+- Slow API responses
+- Long page load times
+- High memory usage
+- Excessive CPU utilization
+- Network latency
+
+---
+
+## AI Agent Instructions
+
+When investigating failures:
+
+1. Capture browser console logs (Web).
+2. Capture network logs.
+3. Capture Android Logcat or iOS device logs.
+4. Capture backend logs if available.
+5. Capture relevant API request and response details.
+6. Attach logs to defect reports whenever possible.
+7. Distinguish between expected warnings and actual defects.
+8. Never ignore fatal exceptions or server errors.
+
+---
+
+## Logging Best Practices
+
+- Always include timestamps in reports.
+- Record the environment (Development, Staging, Production Reference).
+- Include user role and platform information.
+- Capture reproducible log evidence.
+- Avoid exposing sensitive information such as passwords, API keys, or authentication tokens in logs.
+
+# 12. Performance Expectations
+
+## Overview
+
+The Drafters platform should provide a fast, responsive, and reliable experience across Web, Android, iOS, and the Admin Portal.
+
+AI agents should evaluate performance during functional testing, automation execution, and regression testing. Performance issues that negatively impact the user experience should be reported.
+
+---
+
+## General Performance Guidelines
+
+AI agents should verify:
+
+- Pages load within acceptable time.
+- APIs respond within expected limits.
+- UI interactions remain responsive.
+- Loading indicators appear and disappear correctly.
+- No application freezes or crashes occur.
+- No excessive memory or CPU usage is observed.
+
+---
+
+## Web Performance
+
+Verify:
+
+- Homepage loads successfully.
+- Lobby and Contest pages load efficiently.
+- Navigation between pages is smooth.
+- Images and assets load completely.
+- No unnecessary page refreshes occur.
+
+Expected Results
+
+- Fast page rendering.
+- Smooth scrolling.
+- No browser freezing.
+- No layout shifts after loading.
+
+---
+
+## Mobile Performance (Android & iOS)
+
+Verify:
+
+- Application launches successfully.
+- Screens load without excessive delay.
+- Navigation between screens is smooth.
+- No UI lag during user interactions.
+- Animations remain responsive.
+
+Expected Results
+
+- Stable application performance.
+- No ANR (Android Not Responding).
+- No application crashes.
+- Smooth transitions between screens.
+
+---
+
+## API Performance
+
+Verify:
+
+- API responses are received within acceptable response times.
+- No timeout errors.
+- Retry mechanisms work correctly where applicable.
+
+Expected Results
+
+- APIs respond consistently.
+- No unnecessary retries.
+- No excessive latency.
+
+---
+
+## Authentication Performance
+
+Verify:
+
+- Login completes successfully.
+- Registration completes within acceptable time.
+- Password reset requests process correctly.
+- Session validation is responsive.
+
+---
+
+## Wallet & Payment Performance
+
+Verify:
+
+- Wallet balance loads correctly.
+- Deposit flow completes without unnecessary delays.
+- Payment processing remains responsive.
+- Transaction history loads successfully.
+
+Expected Results
+
+- No duplicate requests.
+- No loading loops.
+- Accurate transaction updates.
+
+---
+
+## Contest & Draft Performance
+
+Verify:
+
+- Contest Lobby loads correctly.
+- Contest Details open quickly.
+- Draft Room loads before draft begins.
+- Player selection responds immediately.
+- Countdown timers remain synchronized.
+
+Expected Results
+
+- No delayed player selections.
+- No missed draft actions.
+- Real-time updates function correctly.
+
+---
+
+## Rankings & Leaderboards
+
+Verify:
+
+- Rankings load successfully.
+- Sorting and filtering remain responsive.
+- Leaderboards refresh correctly.
+
+---
+
+## Notifications
+
+Verify:
+
+- Push notifications are delivered promptly.
+- Notification screens load correctly.
+- Notification status updates accurately.
+
+---
+
+## Performance Monitoring
+
+Where available, AI agents should review:
+
+- Browser Developer Tools
+- Network Timing
+- Mobile Performance Metrics
+- Application Logs
+- Backend Monitoring Tools
+
+---
+
+## AI Agent Instructions
+
+When evaluating performance:
+
+1. Measure response times where possible.
+2. Report noticeable performance degradation.
+3. Compare current performance against previous releases.
+4. Capture screenshots or logs for performance issues.
+5. Distinguish between network-related issues and application performance issues.
+6. Escalate performance regressions affecting user experience.
+
+---
+
+## Performance Best Practices
+
+- Avoid unnecessary page reloads.
+- Minimize repeated API calls.
+- Ensure efficient resource loading.
+- Validate loading indicators.
+- Verify application responsiveness across supported platforms.
+- Report performance regressions during regression testing.
