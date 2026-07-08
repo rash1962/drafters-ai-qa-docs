@@ -2018,3 +2018,179 @@ When evaluating performance:
 - Validate loading indicators.
 - Verify application responsiveness across supported platforms.
 - Report performance regressions during regression testing.
+
+# 13. Coding Standards
+
+## Overview
+
+AI-generated code should follow project coding standards to ensure readability, maintainability, consistency, and reusability.
+
+All automation scripts, utilities, and supporting code should follow the standards defined in this section.
+
+---
+
+## General Principles
+
+AI agents should generate code that is:
+
+- Clean and readable
+- Modular and reusable
+- Easy to maintain
+- Well documented where necessary
+- Consistent with existing project conventions
+
+Avoid:
+
+- Duplicate code
+- Hardcoded values
+- Unused variables
+- Unnecessary complexity
+
+---
+
+## Naming Conventions
+
+Use meaningful and descriptive names for:
+
+- Classes
+- Methods
+- Variables
+- Constants
+- Test cases
+- Page Objects
+
+Examples:
+
+- LoginPage
+- WalletPage
+- DraftPage
+- loginWithValidCredentials()
+- verifyWalletBalance()
+
+Avoid generic names such as:
+
+- test1
+- temp
+- value
+- data
+
+---
+
+## Automation Design
+
+Automation code should follow:
+
+- Page Object Model (POM)
+- Reusable utility methods
+- Separation of test logic and page actions
+- Centralized configuration
+- Common helper classes
+
+---
+
+## Test Structure
+
+Each automated test should include:
+
+1. Test setup
+2. Preconditions
+3. Test execution
+4. Validation
+5. Cleanup (if required)
+
+Each test should validate a single business scenario whenever possible.
+
+---
+
+## Synchronization
+
+AI agents should prefer:
+
+- Explicit waits
+- Element state validation
+- Retry mechanisms where appropriate
+
+Avoid:
+
+- Unnecessary static waits
+- Fixed delays
+- Sleep statements unless unavoidable
+
+---
+
+## Assertions
+
+Automation should verify:
+
+- Expected UI elements
+- Correct API responses
+- Business rule validations
+- Error messages
+- Success messages
+- Data consistency
+
+Assertions should clearly indicate the reason for failure.
+
+---
+
+## Test Data Management
+
+Test data should:
+
+- Be reusable
+- Be configurable
+- Avoid hardcoded credentials
+- Support multiple environments
+
+Sensitive information must never be stored in source code.
+
+---
+
+## Logging
+
+Automation should log:
+
+- Test execution steps
+- Important user actions
+- API requests (where appropriate)
+- Validation results
+- Failure reasons
+
+Logs should help identify failures without exposing sensitive information.
+
+---
+
+## Exception Handling
+
+Automation should:
+
+- Handle expected exceptions gracefully
+- Capture useful failure information
+- Continue execution only when appropriate
+- Fail fast for critical issues
+
+---
+
+## Screenshots
+
+Capture screenshots:
+
+- On test failure
+- On unexpected application behavior
+- For critical validation failures
+
+Screenshots should be attached to execution reports whenever possible.
+
+---
+
+## AI Agent Instructions
+
+When generating automation code:
+
+- Follow Page Object Model principles.
+- Generate reusable components.
+- Keep methods small and focused.
+- Avoid duplicated logic.
+- Use meaningful assertions.
+- Follow documented business rules.
+- Do not hardcode environment-specific values or credentials.
