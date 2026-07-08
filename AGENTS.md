@@ -814,3 +814,197 @@ The repository should be updated whenever:
 - A release introduces new functionality.
 
 Maintaining accurate documentation ensures consistency across the Drafters engineering team.
+
+# 5. Development Environment
+
+## Overview
+
+The Drafters platform follows a structured development and testing lifecycle to ensure feature quality, stability, and consistency across all supported platforms.
+
+Development, testing, and deployment activities are performed in separate environments. AI agents and team members should always use the appropriate environment based on the task being performed.
+
+---
+
+# Supported Applications
+
+The Drafters platform consists of the following applications:
+
+- Web Application
+- Android Application
+- iOS Application
+- Admin Portal
+- Backend Services
+
+Each application may have its own deployment cycle while following the same QA and release process.
+
+---
+
+# Development Lifecycle
+
+The standard feature development workflow is:
+
+```
+Requirement
+        │
+        ▼
+Business Analysis
+        │
+        ▼
+Design
+        │
+        ▼
+Development
+        │
+        ▼
+Code Review
+        │
+        ▼
+Deploy to Development Environment
+        │
+        ▼
+Deploy to Staging Environment
+        │
+        ▼
+QA Testing
+        │
+        ▼
+Regression Testing
+        │
+        ▼
+Business Approval
+        │
+        ▼
+Production Deployment
+```
+
+---
+
+# Development Environment
+
+## Purpose
+
+Used by developers during feature implementation and initial testing.
+
+Typical Activities
+
+- Feature Development
+- Unit Testing
+- Initial Bug Fix Verification
+- Local Debugging
+
+AI agents should not assume access to development environments unless explicitly provided.
+
+---
+
+# Staging Environment
+
+## Purpose
+
+Primary environment used by the QA team.
+
+Typical Activities
+
+- Functional Testing
+- Regression Testing
+- Smoke Testing
+- API Validation
+- Cross-platform Testing
+- Release Verification
+
+Unless instructed otherwise, AI-generated test cases and automation should target the Staging environment.
+
+---
+
+# Production Environment
+
+## Purpose
+
+Used by end users.
+
+Typical Activities
+
+- Production Verification
+- Smoke Testing
+- Release Monitoring
+- Critical Issue Validation
+
+Production should never be used for destructive testing or experimental validation.
+
+---
+
+# Platform Distribution
+
+## Web
+
+Accessed through the appropriate environment URL.
+
+---
+
+## Android
+
+Distributed using QA-approved staging builds or APKs.
+
+---
+
+## iOS
+
+Distributed through TestFlight or the approved internal distribution process.
+
+---
+
+## Admin Portal
+
+Used by internal teams for configuration, reporting, and operational management.
+
+---
+
+# QA Responsibilities
+
+During development and staging, QA engineers should verify:
+
+- Feature functionality
+- Business rules
+- UI/UX consistency
+- API behavior
+- Cross-platform compatibility
+- Performance observations
+- Regression impact
+
+---
+
+# AI Agent Guidelines
+
+Before generating automation or test cases, AI agents should:
+
+- Identify the target environment.
+- Confirm the supported platform.
+- Verify feature availability.
+- Follow documented business rules.
+- Avoid assumptions about environment-specific configurations.
+
+---
+
+# Environment Best Practices
+
+Always:
+
+- Use approved QA environments.
+- Verify application version before testing.
+- Validate environment-specific configurations.
+- Document environment details in reports.
+
+Never:
+
+- Use production for destructive testing.
+- Assume feature parity without validation.
+- Hardcode environment-specific values into automation.
+
+---
+
+# Related Documentation
+
+- Environment URLs
+- Deployment Workflow
+- QA Guidelines
+- Release Notes
+- Test Data
