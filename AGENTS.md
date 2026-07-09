@@ -1008,3 +1008,559 @@ Never:
 - QA Guidelines
 - Release Notes
 - Test Data
+
+# 6. Environment URLs
+
+## Overview
+
+The Drafters platform is deployed across multiple environments to support development, quality assurance, user acceptance testing, and production releases.
+
+Each environment serves a specific purpose in the software development lifecycle. AI agents and team members should always verify the target environment before performing any testing, automation, or validation activities.
+
+Actual URLs, credentials, and sensitive configuration values must never be stored in this repository.
+
+---
+
+# Environment Types
+
+The Drafters platform currently supports the following environments:
+
+- Development
+- Staging
+- Production
+
+Additional environments may be introduced as the platform evolves.
+
+---
+
+# Development Environment
+
+## Purpose
+
+Used by developers during feature implementation and debugging.
+
+### Components
+
+| Component | Placeholder |
+|------------|-------------|
+| Web Application | `<DEV_WEB_URL>` |
+| Backend API | `<DEV_API_URL>` |
+| Admin Portal | `<DEV_ADMIN_URL>` |
+
+### Typical Activities
+
+- Feature Development
+- Local Verification
+- Unit Testing
+- Initial Integration Testing
+
+---
+
+# Staging Environment
+
+## Purpose
+
+Primary QA environment used for feature validation before production release.
+
+### Components
+
+| Component | Placeholder |
+|------------|-------------|
+| Web Application | `<STAGING_WEB_URL>` |
+| Backend API | `<STAGING_API_URL>` |
+| Admin Portal | `<STAGING_ADMIN_URL>` |
+| Android Build | `<STAGING_ANDROID_BUILD>` |
+| iOS Build | `<TESTFLIGHT_STAGING_BUILD>` |
+
+### Typical Activities
+
+- Functional Testing
+- Regression Testing
+- Smoke Testing
+- Cross-Platform Testing
+- API Validation
+- Automation Execution
+- UAT Support
+
+---
+
+# Production Environment
+
+## Purpose
+
+Live environment used by end users.
+
+### Components
+
+| Component | Placeholder |
+|------------|-------------|
+| Web Application | `<PRODUCTION_WEB_URL>` |
+| Backend API | `<PRODUCTION_API_URL>` |
+| Admin Portal | `<PRODUCTION_ADMIN_URL>` |
+
+### Typical Activities
+
+- Production Verification
+- Smoke Testing
+- Production Monitoring
+- Critical Issue Validation
+
+Production should never be used for destructive testing or experimental validation.
+
+---
+
+# Environment Configuration
+
+Each environment may have different:
+
+- Feature Flags
+- Payment Configurations
+- KYC Configurations
+- Responsible Gaming Rules
+- Notification Settings
+- Third-Party Integrations
+- Test Data
+
+AI agents should never assume configuration parity between environments.
+
+---
+
+# Environment Validation Checklist
+
+Before starting any testing, verify:
+
+- Correct environment
+- Correct application version
+- Correct build number
+- Required feature flags enabled
+- Required test accounts available
+- Required test data available
+
+---
+
+# Security Guidelines
+
+This repository must never contain:
+
+- Production URLs
+- User credentials
+- API Keys
+- Access Tokens
+- Secret Keys
+- Database Credentials
+
+Environment-specific values should be managed using secure configuration management systems.
+
+---
+
+# AI Agent Instructions
+
+Before generating automation or test cases, AI agents should:
+
+1. Confirm the target environment.
+2. Verify platform availability.
+3. Validate environment-specific configurations.
+4. Use approved QA environments.
+5. Never execute destructive operations against Production.
+
+---
+
+# Related Documentation
+
+- Development Environment
+- Deployment Workflow
+- Test Data
+- Safety Rules
+
+# 7. Authentication & User Roles
+
+## Overview
+
+Authentication is the process of verifying a user's identity before granting access to protected resources within the Drafters platform.
+
+The Drafters platform uses role-based access control (RBAC) to ensure users can only access features and functionality permitted for their assigned role.
+
+AI agents should understand the authentication workflow, user roles, and authorization rules before generating automation, test cases, or reviewing feature implementations.
+
+---
+
+# Authentication Methods
+
+The Drafters platform supports secure authentication across all supported platforms.
+
+Supported Platforms
+
+- Web
+- Android
+- iOS
+- Admin Portal
+
+Authentication is required before users can access protected features such as:
+
+- Wallet
+- Payments
+- Contest Participation
+- Draft
+- Pick'em
+- User Profile
+- Admin Portal
+
+---
+
+# User Roles
+
+The platform supports multiple user roles.
+
+## 1. End User
+
+Purpose
+
+Fantasy sports users who participate in contests.
+
+Permissions
+
+- Register
+- Login
+- Manage Profile
+- Complete KYC
+- Deposit Funds
+- Withdraw Funds
+- Join Contests
+- Draft Players
+- Create Pick'em Entries
+- View Rankings
+- View Notifications
+
+Supported Platforms
+
+- Web
+- Android
+- iOS
+
+---
+
+## 2. Administrator
+
+Purpose
+
+Manage platform operations and configurations.
+
+Permissions
+
+- Manage Users
+- Manage Contests
+- Configure Promotions
+- Configure Responsible Gaming
+- Manage Payments
+- Configure Feature Flags
+- View Reports
+- Monitor Platform Activity
+
+Supported Platforms
+
+- Admin Portal
+
+---
+
+## 3. QA Engineer
+
+Purpose
+
+Validate application functionality before release.
+
+Permissions
+
+- Execute Functional Testing
+- Execute Regression Testing
+- Validate APIs
+- Execute Automation
+- Verify Release Builds
+- Perform Smoke Testing
+
+QA Engineers should always use approved QA environments and test accounts.
+
+---
+
+## 4. Developer
+
+Purpose
+
+Implement and maintain application features.
+
+Responsibilities
+
+- Develop Features
+- Fix Defects
+- Review Code
+- Support QA
+- Maintain APIs
+
+---
+
+# Authentication Flow
+
+A standard authentication flow consists of:
+
+1. User enters credentials.
+2. Credentials are validated.
+3. User is authenticated.
+4. Session is established.
+5. User gains access based on assigned role.
+
+If authentication fails:
+
+- Appropriate error messages should be displayed.
+- Access to protected resources should be denied.
+
+---
+
+# Authorization
+
+Authorization determines which resources a user can access after successful authentication.
+
+AI agents should verify:
+
+- Role-based access control.
+- Restricted page access.
+- Unauthorized access handling.
+- Session validation.
+- Permission enforcement.
+
+---
+
+# Session Management
+
+Verify the following:
+
+- Session created after successful login.
+- Session expires according to application configuration.
+- Logout invalidates the active session.
+- Expired sessions redirect users to the login page.
+
+---
+
+# QA Validation Checklist
+
+Verify:
+
+- Valid Login
+- Invalid Login
+- Required Field Validation
+- Password Validation
+- Session Expiration
+- Logout Functionality
+- Unauthorized Access
+- Role-Based Permissions
+- Authentication Error Messages
+
+---
+
+# Security Guidelines
+
+Authentication documentation must never contain:
+
+- Production Credentials
+- Test Passwords
+- API Keys
+- Authentication Tokens
+- Secret Keys
+
+Sensitive credentials should be managed using approved secure storage solutions.
+
+---
+
+# AI Agent Instructions
+
+Before generating authentication automation or test cases, AI agents should:
+
+- Identify the user role.
+- Verify authentication requirements.
+- Validate role-based permissions.
+- Consider platform-specific authentication behavior.
+- Use approved QA accounts.
+- Never hardcode credentials in generated code or documentation.
+
+---
+
+# Related Documentation
+
+- flows/authentication.md
+- flows/login.md
+- flows/registration.md
+- flows/forgot-password.md
+- flows/profile.md
+- api/authentication.md
+- test-data/qa-accounts.md
+
+# 8. Business Domains
+
+## Overview
+
+The Drafters platform consists of multiple business domains that work together to provide a complete fantasy sports experience across Web, Android, iOS, and the Admin Portal.
+
+Each business domain has a specific purpose, business rules, APIs, user journeys, and automation requirements.
+
+Detailed documentation for each domain is maintained in the `flows/` directory.
+
+AI agents should always review the relevant flow documentation before generating automation, reviewing code, or analyzing defects.
+
+---
+
+# Business Domain Overview
+
+| Domain | Purpose | Documentation |
+|---------|---------|---------------|
+| Authentication | Secure user access and session management | `flows/authentication.md` |
+| Registration | User onboarding and account creation | `flows/registration.md` |
+| Login | User authentication | `flows/login.md` |
+| Forgot Password | Password recovery process | `flows/forgot-password.md` |
+| User Profile | Profile management and account settings | `flows/profile.md` |
+| KYC | Identity verification and compliance | `flows/kyc.md` |
+| Wallet | Manage user balance and transactions | `flows/wallet.md` |
+| Finix Payment | Card payment processing | `flows/finix-payment.md` |
+| PayPal | Alternative payment method | `flows/paypal.md` |
+| Contest Lobby | Browse available contests | `flows/lobby.md` |
+| Contest | Contest creation and participation | `flows/contest.md` |
+| Draft | Player drafting workflow | `flows/draft.md` |
+| Slow Draft | Long-duration drafting | `flows/slow-draft.md` |
+| Fast Draft | Real-time drafting | `flows/fast-draft.md` |
+| Best Ball | Best Ball fantasy contests | `flows/best-ball.md` |
+| Best Ball Survival | Survival tournament mode | `flows/best-ball-survival.md` |
+| Pick'em | Player prediction contests | `flows/pickem.md` |
+| Props | Player proposition picks | `flows/props.md` |
+| Props Booster | Promotional boosters | `flows/props-booster.md` |
+| Rankings | Player and contest rankings | `flows/rankings.md` |
+| Leaderboard | Leaderboard and standings | `flows/leaderboard.md` |
+| Notifications | Push, email, and in-app notifications | `flows/notifications.md` |
+| Rewards | User rewards and promotions | `flows/rewards.md` |
+| Responsible Gaming | Deposit limits and compliance | `flows/responsible-gaming.md` |
+| Admin Portal | Platform administration | `flows/admin-panel.md` |
+
+---
+
+# Business Domain Dependencies
+
+The following diagram shows how major modules interact.
+
+```
+
+Authentication
+│
+├── Registration
+├── Login
+├── Profile
+├── KYC
+│
+▼
+
+Wallet
+│
+├── Finix Payment
+├── PayPal
+├── Rewards
+└── Responsible Gaming
+│
+▼
+
+Contest Lobby
+│
+▼
+
+Contest
+│
+▼
+
+Draft
+│
+├── Slow Draft
+├── Fast Draft
+├── Best Ball
+├── Best Ball Survival
+├── Pick'em
+├── Props
+└── Props Booster
+│
+▼
+
+Rankings
+│
+▼
+
+Leaderboard
+│
+▼
+
+Notifications
+
+```
+
+---
+
+# Platform Coverage
+
+| Business Domain | Web | Android | iOS | Admin |
+|-----------------|:---:|:-------:|:---:|:-----:|
+| Authentication | ✅ | ✅ | ✅ | ✅ |
+| Registration | ✅ | ✅ | ✅ | ❌ |
+| Profile | ✅ | ✅ | ✅ | ❌ |
+| KYC | ✅ | ✅ | ✅ | ✅ |
+| Wallet | ✅ | ✅ | ✅ | ❌ |
+| Payments | ✅ | ✅ | ✅ | ✅ |
+| Contest | ✅ | ✅ | ✅ | ✅ |
+| Draft | ✅ | ✅ | ✅ | ❌ |
+| Pick'em | ✅ | ✅ | ✅ | ❌ |
+| Props Booster | ✅ | ✅ | ✅ | ✅ |
+| Rankings | ✅ | ✅ | ✅ | ❌ |
+| Notifications | ✅ | ✅ | ✅ | ✅ |
+| Responsible Gaming | ✅ | ✅ | ✅ | ✅ |
+
+---
+
+# AI Agent Responsibilities
+
+Before working on any feature, AI agents should:
+
+1. Identify the affected business domain.
+2. Read the corresponding document in the `flows/` directory.
+3. Review related APIs (if applicable).
+4. Understand business rules and validations.
+5. Consider platform-specific behavior.
+6. Follow documented automation standards.
+7. Generate outputs consistent with project guidelines.
+
+---
+
+# Documentation Standards
+
+Every business domain document must include the following sections:
+
+1. Overview
+2. Business Purpose
+3. User Flow
+4. UI Screens
+5. Backend APIs
+6. Business Rules
+7. Validation Rules
+8. Positive Scenarios
+9. Negative Scenarios
+10. Edge Cases
+11. Error Messages
+12. Platform Differences
+13. Admin Configuration
+14. Test Data
+15. Automation Strategy
+16. Related Modules
+17. Known Issues
+18. Future Enhancements
+
+All business domain documents should follow this standard template to ensure consistency across the repository.
+
+---
+
+# Related Documentation
+
+- `architecture/system-overview.md`
+- `flows/`
+- `api/`
+- `automation/`
+- `test-data/`
