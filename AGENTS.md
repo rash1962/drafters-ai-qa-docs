@@ -1564,3 +1564,495 @@ All business domain documents should follow this standard template to ensure con
 - `api/`
 - `automation/`
 - `test-data/`
+
+# 9. Business Rules
+
+## Overview
+
+Business rules define the expected behavior of the Drafters platform and ensure consistency across Web, Android, iOS, and the Admin Portal.
+
+These rules serve as the foundation for feature implementation, quality assurance, automation, and AI-assisted analysis.
+
+This section provides a high-level overview of the core business rules. Detailed business rules, validations, workflows, and feature-specific behavior are documented in the corresponding files under the `flows/` directory.
+
+---
+
+## General Business Rules
+
+The following rules apply across the Drafters platform unless otherwise specified:
+
+- Users must be authenticated before accessing protected features.
+- Business logic should remain consistent across Web, Android, iOS, and Admin Portal.
+- All critical business actions should generate the expected system response.
+- Failed operations must not leave the system in an inconsistent state.
+- User-facing validation messages should be clear and meaningful.
+- Role-based access control (RBAC) must be enforced.
+- All financial transactions must be recorded appropriately.
+- Platform-specific behavior should follow documented business requirements.
+
+---
+
+## Authentication & User Management
+
+### Business Rules
+
+- Users must complete registration before accessing protected features.
+- Login is required to access user-specific modules.
+- User profile information should remain synchronized across supported platforms.
+- Unauthorized users must not access restricted resources.
+- Sessions must be securely managed and expire according to platform configuration.
+
+**Reference Documentation**
+
+- flows/authentication.md
+- flows/registration.md
+- flows/login.md
+- flows/profile.md
+
+---
+
+## Identity Verification (KYC)
+
+### Business Rules
+
+- KYC verification is required where applicable by business or regulatory requirements.
+- Financial features may be restricted until verification is completed.
+- KYC status should remain consistent across all supported platforms.
+- Verification failures should display appropriate guidance to users.
+
+**Reference Documentation**
+
+- flows/kyc.md
+
+---
+
+## Wallet & Payments
+
+### Business Rules
+
+- Wallet balance must never become negative.
+- Successful deposits must correctly update wallet balance.
+- Failed payment attempts must not credit the wallet.
+- Refunds must follow documented business rules.
+- Every financial transaction should appear in transaction history.
+- Payment providers should follow their configured integration workflows.
+
+**Reference Documentation**
+
+- flows/wallet.md
+- flows/finix-payment.md
+- flows/paypal.md
+
+---
+
+## Contest & Lobby
+
+### Business Rules
+
+- Only eligible users may join contests.
+- Contest availability depends on business configuration.
+- Entry fees should only be deducted after a successful contest entry.
+- Contest lifecycle must follow configured business rules.
+- Contest information should remain synchronized across supported platforms.
+
+**Reference Documentation**
+
+- flows/lobby.md
+- flows/contest.md
+
+---
+
+## Draft
+
+### Business Rules
+
+- Drafts must begin according to contest configuration.
+- Draft order must follow configured draft settings.
+- A player cannot be drafted more than once in the same draft.
+- Auto Pick must execute after the configured pick timer expires.
+- Draft status should update correctly throughout the draft lifecycle.
+
+**Reference Documentation**
+
+- flows/draft.md
+- flows/slow-draft.md
+- flows/fast-draft.md
+- flows/best-ball.md
+- flows/best-ball-survival.md
+
+---
+
+## Pick'em & Props
+
+### Business Rules
+
+- Users may submit entries only when all validation rules are satisfied.
+- Entry validation should follow configured business rules.
+- Props Boosters should apply only when eligibility requirements are met.
+- Contest settlement should follow official scoring rules.
+- Push, Void, Refund, Safety, and Revive scenarios must follow documented feature rules.
+
+**Reference Documentation**
+
+- flows/pickem.md
+- flows/props.md
+- flows/props-booster.md
+
+---
+
+## Rankings & Leaderboards
+
+### Business Rules
+
+- Rankings should reflect the latest available contest results.
+- Leaderboards should update after scoring is completed.
+- Ranking calculations should remain consistent across supported platforms.
+
+**Reference Documentation**
+
+- flows/rankings.md
+- flows/leaderboard.md
+
+---
+
+## Responsible Gaming
+
+### Business Rules
+
+- Responsible Gaming controls must be enforced where configured.
+- Deposit limits should follow configured daily, weekly, monthly, and yearly limits.
+- Restricted users must not bypass Responsible Gaming restrictions.
+
+**Reference Documentation**
+
+- flows/responsible-gaming.md
+
+---
+
+## Notifications
+
+### Business Rules
+
+- Notifications should be generated based on configured events.
+- Duplicate notifications should not be created.
+- Notification delivery should respect user preferences where supported.
+
+**Reference Documentation**
+
+- flows/notifications.md
+
+---
+
+## Admin Portal
+
+### Business Rules
+
+- Administrative actions must be restricted to authorized users.
+- Configuration changes should propagate correctly to supported applications.
+- Administrative changes must follow documented approval and deployment processes.
+
+**Reference Documentation**
+
+- flows/admin-panel.md
+
+---
+
+## AI Agent Instructions
+
+Before generating automation, test cases, code reviews, or business analysis, AI agents should:
+
+- Identify the relevant business domain.
+- Review the corresponding documentation under the `flows/` directory.
+- Follow documented business rules and validations.
+- Consider platform-specific behavior.
+- Avoid assumptions that are not documented.
+- Report business rule violations separately from UI or implementation issues.
+
+---
+
+## Detailed Business Rules
+
+This section provides only a high-level overview of the Drafters business rules.
+
+Complete feature-specific documentation, including workflows, validations, edge cases, error handling, and business logic, is maintained in the corresponding files under the `flows/` directory.
+
+AI agents and team members should always refer to the relevant feature documentation before generating automation, test cases, or implementation recommendations.
+
+---
+
+## Related Documentation
+
+- flows/
+- api/
+- Frontend QA Guidelines
+- API QA Guidelines
+- Database Validation
+- Architecture Documentation
+
+# 10. Frontend QA Guidelines
+
+## Overview
+
+This section defines the standard Quality Assurance (QA) practices for validating the Drafters platform across all supported client applications.
+
+The objective is to ensure consistent functionality, business rule compliance, usability, and user experience across Web, Android, iOS, and the Admin Portal.
+
+All manual testing, automation testing, regression testing, and AI-generated test cases should follow these guidelines.
+
+---
+
+# Supported Platforms
+
+Frontend validation should be performed for the following applications:
+
+- Web Application
+- Android Application
+- iOS Application
+- Admin Portal
+
+Unless a feature is platform-specific, behavior should remain consistent across all supported platforms.
+
+---
+
+# QA Testing Objectives
+
+Every feature should be validated for:
+
+- Functional correctness
+- Business rule compliance
+- UI consistency
+- Navigation flow
+- Data accuracy
+- Cross-platform compatibility
+- Performance observations
+- Error handling
+- Accessibility (where applicable)
+- Overall user experience
+
+---
+
+# Standard User Journey Validation
+
+Each feature should be tested using the complete user journey.
+
+Typical workflow:
+
+```
+Launch Application
+        │
+        ▼
+Authentication
+        │
+        ▼
+Feature Access
+        │
+        ▼
+User Interaction
+        │
+        ▼
+Backend Processing
+        │
+        ▼
+UI Validation
+        │
+        ▼
+Success / Failure Validation
+        │
+        ▼
+Data Verification
+```
+
+Every user journey should complete successfully without unexpected interruptions.
+
+---
+
+# Core QA Validation Checklist
+
+The following validations should be performed for every feature whenever applicable.
+
+## Functional Validation
+
+Verify:
+
+- Feature works as expected.
+- Business rules are correctly implemented.
+- User actions produce expected results.
+- Data is displayed correctly.
+- State changes occur correctly.
+- Feature behaves consistently.
+
+---
+
+## UI Validation
+
+Verify:
+
+- Layout is correct.
+- Fonts are consistent.
+- Colors follow design guidelines.
+- Icons display correctly.
+- Images load correctly.
+- Buttons are properly aligned.
+- Labels and text are correct.
+- No overlapping UI elements.
+- No truncation issues.
+
+---
+
+## Navigation Validation
+
+Verify:
+
+- Navigation follows expected workflow.
+- Back navigation behaves correctly.
+- Deep links open the correct screens.
+- External links function correctly.
+- Navigation state is maintained.
+
+---
+
+## Input Validation
+
+Verify:
+
+- Required fields.
+- Invalid input.
+- Boundary values.
+- Character limits.
+- Special characters.
+- Empty fields.
+- Input formatting.
+- Keyboard behavior on mobile.
+
+---
+
+## API Validation
+
+Verify:
+
+- Correct API requests are triggered.
+- Successful responses update the UI.
+- Failed responses display appropriate messages.
+- No unexpected API failures.
+- Loading states behave correctly.
+
+---
+
+## Error Handling
+
+Verify:
+
+- Error messages are user-friendly.
+- Validation messages are meaningful.
+- Retry functionality works correctly.
+- Unexpected failures are handled gracefully.
+- Application does not crash.
+
+---
+
+## Loading State Validation
+
+Verify:
+
+- Loading indicators appear correctly.
+- Loaders disappear after completion.
+- Duplicate requests are prevented.
+- Users receive visual feedback while processing.
+
+---
+
+## Cross-Platform Validation
+
+Verify consistency between:
+
+- Web
+- Android
+- iOS
+
+Check for:
+
+- Business logic
+- UI behavior
+- Validation messages
+- Navigation
+- Calculations
+- Feature availability
+
+Document any platform-specific differences.
+
+---
+
+# Regression Testing
+
+Regression testing should verify that new changes do not impact existing functionality.
+
+Areas to validate include:
+
+- Authentication
+- Wallet
+- Payments
+- Contest
+- Draft
+- Pick'em
+- Props
+- Rankings
+- Notifications
+- Profile
+- Responsible Gaming
+
+Regression scope should be determined based on the feature being released.
+
+---
+
+# AI Agent Responsibilities
+
+Before generating frontend automation or manual test cases, AI agents should:
+
+- Review the relevant feature documentation.
+- Follow documented business rules.
+- Consider platform-specific behavior.
+- Generate reusable and maintainable test cases.
+- Include positive, negative, and edge case scenarios.
+- Avoid undocumented assumptions.
+
+---
+
+# Expected QA Deliverables
+
+Frontend validation should result in:
+
+- Test Cases
+- Test Execution Report
+- Defect Report
+- Regression Report
+- Screenshots (when applicable)
+- Screen Recordings (for reproducible issues)
+- Platform Comparison Report
+- Release Validation Summary
+
+---
+
+# General QA Best Practices
+
+Always verify:
+
+- No console errors.
+- No failed API requests (unless expected).
+- No broken images or icons.
+- No JavaScript exceptions.
+- Correct navigation.
+- Correct data rendering.
+- Responsive layouts where applicable.
+- Proper loading indicators.
+- Correct success and error messages.
+- Application stability.
+
+---
+
+# Related Documentation
+
+- flows/
+- api/
+- automation/
+- reports/
+- release-notes/
